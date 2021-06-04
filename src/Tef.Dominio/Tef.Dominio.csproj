@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcCliSiTef.cs" />
     <Compile Include="AcTefDial.cs" />
     <Compile Include="AcTefDialHomologacao.cs" />
     <Compile Include="AcTefException.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Enums\FormaIdentificacaoCliente.cs" />
     <Compile Include="Enums\Moeda.cs" />
     <Compile Include="Enums\Operadora.cs" />
+    <Compile Include="Enums\SiTef.cs" />
     <Compile Include="ExibeMensagemEventArgs.cs" />
     <Compile Include="ExtTefLinhas.cs" />
     <Compile Include="FabricaOperadora.cs" />
