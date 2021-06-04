@@ -47,6 +47,7 @@
     <Compile Include="Arquivo.cs" />
     <Compile Include="AutorizaDfeEventArgs.cs" />
     <Compile Include="Cappta.cs" />
+    <Compile Include="CliSiTef\SitefDllMapper.cs" />
     <Compile Include="Comparavel.cs" />
     <Compile Include="CliSiTef\ConfigAcTefCliSiTef.cs" />
     <Compile Include="ConfigAcTefDial.cs" />
