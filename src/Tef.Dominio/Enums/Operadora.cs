@@ -8,6 +8,7 @@
         Linx = 4,
         GetCard = 5,
         TefDial = 98,
-        TefDialHomologacao = 99
+        TefDialHomologacao = 99,
+        CliSiTef = 100
     }
 }

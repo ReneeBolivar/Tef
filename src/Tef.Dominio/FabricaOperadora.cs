@@ -23,6 +23,8 @@ namespace Tef.Dominio
                     return new AcTefDial(requisicao, configAcTefDial);
                 case Operadora.TefDialHomologacao:
                     return new AcTefDialHomologacao(requisicao, configAcTefDial);
+                case Operadora.CliSiTef:
+                    return new AcCliSiTef();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operadora), operadora, null);
             }

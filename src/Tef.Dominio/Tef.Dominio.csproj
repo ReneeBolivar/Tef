@@ -48,6 +48,7 @@
     <Compile Include="AutorizaDfeEventArgs.cs" />
     <Compile Include="Cappta.cs" />
     <Compile Include="Comparavel.cs" />
+    <Compile Include="ConfigAcTefCliSiTef.cs" />
     <Compile Include="ConfigAcTefDial.cs" />
     <Compile Include="Conversores\ConverterRealEmCentavos.cs" />
     <Compile Include="Entidade.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="FabricarRequisicao.cs" />
     <Compile Include="GetCard.cs" />
     <Compile Include="IAcTefRequisicao.cs" />
+    <Compile Include="IConfigAcTefCliSiTef.cs" />
     <Compile Include="IConfigAcTefDial.cs" />
     <Compile Include="IImprimeViaEventArgs.cs" />
     <Compile Include="ImprimeViaEventArgs.cs" />
