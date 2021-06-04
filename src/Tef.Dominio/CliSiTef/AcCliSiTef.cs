@@ -36,7 +36,7 @@ namespace Tef.Dominio.CliSiTef
         public void Inicializa()
         {
             if (Inicializado) return;
-            inicializado = true;
+            
 
             var @params = _configuracaoCliSiTef.ParametrosAdicionais.Converter();
 
@@ -46,7 +46,10 @@ namespace Tef.Dominio.CliSiTef
                                                                        _configuracaoCliSiTef.Reservado ? "1" : "0",
                                                                        @params);
 
-            AcTefException.Quando(retorno > 0, ((ErrosSitef)retorno).ObterDescricao());
+            if (ErrosSitef.Nothing == (ErrosSitef)retorno)
+                inicializado = true;
+            else
+                AcTefException.Quando(retorno != 0, ((ErrosSitef)retorno).ObterDescricao());
         }
 
         void Desinicializa()
