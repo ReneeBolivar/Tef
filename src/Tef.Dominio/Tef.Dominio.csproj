@@ -36,7 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcCliSiTef.cs" />
+    <Compile Include="CliSiTef\AcCliSiTef.cs" />
     <Compile Include="AcTefDial.cs" />
     <Compile Include="AcTefDialHomologacao.cs" />
     <Compile Include="AcTefException.cs" />
@@ -48,7 +48,7 @@
     <Compile Include="AutorizaDfeEventArgs.cs" />
     <Compile Include="Cappta.cs" />
     <Compile Include="Comparavel.cs" />
-    <Compile Include="ConfigAcTefCliSiTef.cs" />
+    <Compile Include="CliSiTef\ConfigAcTefCliSiTef.cs" />
     <Compile Include="ConfigAcTefDial.cs" />
     <Compile Include="Conversores\ConverterRealEmCentavos.cs" />
     <Compile Include="Entidade.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="FabricarRequisicao.cs" />
     <Compile Include="GetCard.cs" />
     <Compile Include="IAcTefRequisicao.cs" />
-    <Compile Include="IConfigAcTefCliSiTef.cs" />
+    <Compile Include="CliSiTef\IConfigAcTefCliSiTef.cs" />
     <Compile Include="IConfigAcTefDial.cs" />
     <Compile Include="IImprimeViaEventArgs.cs" />
     <Compile Include="ImprimeViaEventArgs.cs" />

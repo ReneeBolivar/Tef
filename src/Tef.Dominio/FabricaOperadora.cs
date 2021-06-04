@@ -1,4 +1,5 @@
 ﻿using System;
+using Tef.Dominio.CliSiTef;
 using Tef.Dominio.Enums;
 
 namespace Tef.Dominio

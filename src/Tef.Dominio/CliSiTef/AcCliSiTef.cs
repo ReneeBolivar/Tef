@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tef.Dominio
+namespace Tef.Dominio.CliSiTef
 {
     internal class AcCliSiTef : ITef
     {

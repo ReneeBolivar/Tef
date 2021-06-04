@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tef.Dominio
+namespace Tef.Dominio.CliSiTef
 {
     public interface IConfigAcTefCliSiTef
     {
