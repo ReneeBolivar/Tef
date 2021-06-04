@@ -1,6 +1,8 @@
-﻿namespace Tef.Dominio.Enums
+﻿using System.ComponentModel;
+
+namespace Tef.Dominio.Enums
 {
-    public enum Comandos
+    public enum ComandosSitef
     {
         /// <summary>
         /// [0] Está devolvendo um valor para, se desejado, ser armazenado pela automação.
@@ -133,7 +135,7 @@
         ClearQRCode = 51
     }
 
-    public enum Retornos
+    public enum RetornosSitef
     {
         /// <summary>
         /// [0] Sucesso na execução da função.
@@ -279,5 +281,80 @@
         /// [outro valor negativo] Erros detectados internamente pela rotina
         /// </summary>
         InternalErrorDetectedByRoutine
+    }
+
+    public enum ErrosSitef
+    {
+        /// <summary>
+        /// [0] Não ocorreu erro.
+        /// </summary>
+        [Description("Não ocorreu erro.")]
+        Nothing = 0,
+
+        /// <summary>
+        /// [1] Endereço IP inválido ou não resolvido
+        /// </summary>
+        [Description("Endereço IP inválido ou não resolvido.")]
+        InvalidHost = 1,
+
+        /// <summary>
+        /// [2] Código da loja inválido
+        /// </summary>
+        [Description("Código da loja inválido")]
+        InvalidStoreId = 2,
+
+        /// <summary>
+        /// [3] Código de terminal inválido
+        /// </summary>
+        [Description("Código de terminal inválido")]
+        InvalidTerminalId = 3,
+
+        /// <summary>
+        /// [6] Erro na inicialização do Tcp/Ip
+        /// </summary>
+        [Description("Erro na inicialização do Tcp/Ip.")]
+        TcpIpInitializeError = 6,
+
+        /// <summary>
+        /// [7] Falta de memória
+        /// </summary>
+        [Description("Falta de memória.")]
+        OutOfMemory = 7,
+
+        /// <summary>
+        /// [8] Não encontrou a CliSiTef ou ela está com problemas
+        /// </summary>
+        [Description("Não encontrou a CliSiTef ou ela está com problemas")]
+        NotFound = 8,
+
+        /// <summary>
+        /// [9] Configuração de servidores SiTef foi excedida.
+        /// </summary>
+        [Description("Configuração de servidores SiTef foi excedida.")]
+        SettingsExceeded = 9,
+
+        /// <summary>
+        /// [10] Erro de acesso na pasta CliSiTef (possível falta de permissão para escrita)
+        /// </summary>
+        [Description("Erro de acesso na pasta CliSiTef (possível falta de permissão para escrita)")]
+        DirectoryAccessError = 10,
+
+        /// <summary>
+        /// [11] Dados inválidos passados pela automação.
+        /// </summary>
+        [Description("Dados inválidos passados pela automação.")]
+        InvalidData = 11,
+
+        /// <summary>
+        /// [12] Modo seguro não ativo (possível falta de configuração no servidor SiTef do arquivo .cha).
+        /// </summary>
+        [Description("Modo seguro não ativo (possível falta de configuração no servidor SiTef do arquivo .cha).")]
+        SecureModeDisabled = 12,
+
+        /// <summary>
+        /// [13] Caminho DLL inválido (o caminho completo das bibliotecas está muito grande).
+        /// </summary>
+        [Description("Caminho DLL inválido (o caminho completo das bibliotecas está muito grande).")]
+        InvalidPath = 13
     }
 }

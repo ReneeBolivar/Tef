@@ -52,6 +52,7 @@
     <Compile Include="CliSiTef\ConfigAcTefCliSiTef.cs" />
     <Compile Include="ConfigAcTefDial.cs" />
     <Compile Include="Conversores\ConverterRealEmCentavos.cs" />
+    <Compile Include="Conversores\DicionarioEmParametroAdicional.cs" />
     <Compile Include="Entidade.cs" />
     <Compile Include="Enums\AcTefStatus.cs" />
     <Compile Include="Enums\FormaIdentificacaoCliente.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="TefLinha.cs" />
     <Compile Include="TefLinhaLista.cs" />
     <Compile Include="ConfigRequisicao.cs" />
+    <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="ViaComprovante.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

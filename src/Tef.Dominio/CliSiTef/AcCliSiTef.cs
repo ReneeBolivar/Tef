@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tef.Dominio.Conversores;
+using Tef.Dominio.Enums;
+using Tef.Dominio.Utils;
 
 namespace Tef.Dominio.CliSiTef
 {
@@ -32,6 +35,18 @@ namespace Tef.Dominio.CliSiTef
 
         public void Inicializa()
         {
+            if (Inicializado) return;
+            inicializado = true;
+
+            var @params = _configuracaoCliSiTef.ParametrosAdicionais.Converter();
+
+            var retorno = SitefDllMapper.ConfiguraIntSiTefInterativoEx(_configuracaoCliSiTef.Host,
+                                                                       _configuracaoCliSiTef.CodigoLoja,
+                                                                       _configuracaoCliSiTef.NumeroTerminal,
+                                                                       _configuracaoCliSiTef.Reservado ? "1" : "0",
+                                                                       @params);
+
+            AcTefException.Quando(retorno > 0, ((ErrosSitef)retorno).ObterDescricao());
         }
 
         void Desinicializa()
