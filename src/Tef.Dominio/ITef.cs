@@ -5,10 +5,9 @@ namespace Tef.Dominio
     public interface ITef : IRequisicaoAtv
     {
         RespostaAtv Atv();
-        RespostaAdm Adm();
+        RespostaAdm Adm(string documentoVinculado = "");
         RespostaCnc Cnc(string rede, string nsu, DateTime transacaoEm, decimal valor);
-        RespostaCrt Crt(decimal valor, string documentoVinculado, bool confirmarManual = false);
-
+        RespostaCrt Crt(decimal valor, string documentoVinculado, string operador = "", bool confirmarManual = false);
         RespostaCrt ConfirmarCrt(AutorizaDfeEventArgs autorizaDfeEventArgs);
 
         void Cnf(

@@ -47,7 +47,11 @@
     <Compile Include="Arquivo.cs" />
     <Compile Include="AutorizaDfeEventArgs.cs" />
     <Compile Include="Cappta.cs" />
+    <Compile Include="CliSiTef\Args\CliSitefCamposEventArgs.cs" />
+    <Compile Include="CliSiTef\IRequisicaoSitef.cs" />
+    <Compile Include="CliSiTef\RequisicaoSitef.cs" />
     <Compile Include="CliSiTef\SitefDllMapper.cs" />
+    <Compile Include="CliSiTef\SiTefTransacao.cs" />
     <Compile Include="Comparavel.cs" />
     <Compile Include="CliSiTef\ConfigAcTefCliSiTef.cs" />
     <Compile Include="ConfigAcTefDial.cs" />
@@ -59,13 +63,14 @@
     <Compile Include="Enums\Moeda.cs" />
     <Compile Include="Enums\Operadora.cs" />
     <Compile Include="Enums\SiTef.cs" />
+    <Compile Include="Exceptions\SitefEventNotImplementedException.cs" />
     <Compile Include="ExibeMensagemEventArgs.cs" />
     <Compile Include="ExtTefLinhas.cs" />
     <Compile Include="FabricaOperadora.cs" />
     <Compile Include="FabricarRequisicao.cs" />
     <Compile Include="GetCard.cs" />
     <Compile Include="IAcTefRequisicao.cs" />
-    <Compile Include="CliSiTef\IConfigAcTefCliSiTef.cs" />
+    <Compile Include="CliSiTef\IConfigAcCliSiTef.cs" />
     <Compile Include="IConfigAcTefDial.cs" />
     <Compile Include="IImprimeViaEventArgs.cs" />
     <Compile Include="ImprimeViaEventArgs.cs" />
@@ -85,7 +90,12 @@
     <Compile Include="TefLinha.cs" />
     <Compile Include="TefLinhaLista.cs" />
     <Compile Include="ConfigRequisicao.cs" />
+    <Compile Include="Utils\BandeiraPadrao.cs" />
+    <Compile Include="Utils\ComprovanteTipos.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
+    <Compile Include="Utils\ModalidadePagamentoGrupo.cs" />
+    <Compile Include="Utils\RedeAutorizadora.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="ViaComprovante.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

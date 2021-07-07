@@ -18,6 +18,11 @@ namespace Tef.Dominio
             Posicao = int.Parse(Chave.Split('-')[1]);
         }
 
+        public TefLinha(string chave, string valor, int posicao) : this(chave, valor)
+        {
+            Posicao = posicao;
+        }
+
         public TefLinha(string chave, int valor) : this(chave, valor.ToString()) { }
 
         public TefLinha(string chave, decimal valor) : this(chave, ConverterRealEmCentavos.ConverterEmCentavos(valor)) { }

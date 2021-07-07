@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tef.Dominio.CliSiTef
 {
-    public class ConfigAcTefCliSiTef : IConfigAcTefCliSiTef
+    public class ConfigAcTefCliSiTef : IConfigAcCliSiTef
     {
         public string Host { get; }
         public string CodigoLoja { get; }
@@ -16,6 +16,8 @@ namespace Tef.Dominio.CliSiTef
         public DateTime DataHoraFiscal { get; }
         public bool ExibirErroRetorno { get; }
         public string PathDll { get; }
+        public bool RetornaQRCode { get; set; }
+        public IConfigTef ConfiguracaoTef { get; }
 
         public ConfigAcTefCliSiTef(string host,
                                    string codigoLoja,
@@ -26,6 +28,8 @@ namespace Tef.Dominio.CliSiTef
                                    string restricoes,
                                    bool exibirErroRetorno,
                                    string pathDll,
+                                   bool retornaQRCode,
+                                   IConfigTef configuracaoTef,
                                    DateTime? dataHoraFiscal = null,
                                    string documentoFiscal = null)
         {
@@ -40,6 +44,8 @@ namespace Tef.Dominio.CliSiTef
             DataHoraFiscal = dataHoraFiscal ?? DateTime.Now;
             ExibirErroRetorno = exibirErroRetorno;
             PathDll = pathDll;
+            RetornaQRCode = retornaQRCode;
+            ConfiguracaoTef = configuracaoTef;
         }
     }
 }

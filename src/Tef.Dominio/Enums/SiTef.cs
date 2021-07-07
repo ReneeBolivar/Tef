@@ -357,4 +357,42 @@ namespace Tef.Dominio.Enums
         [Description("Caminho DLL inválido (o caminho completo das bibliotecas está muito grande).")]
         InvalidPath = 13
     }
+
+    public enum CampoCliSitefTipos
+    {
+        Numeric,
+        Alphanumeric,
+        Confirmation,
+        QrCode,
+        Menu,
+        Wait
+    }
+
+    public enum TipoCampo
+    {
+        /*
+         0    - 
+         100  - Modalidade de pagamento
+         105  - Data/Hora transação
+         106  - 
+         107  - 
+         111  - Texto da modalidade de cancelamento
+         121  - Via do cliente para impressão
+         122  - Via do caixa para impressão
+         123  - Sequencia dos comprovantes que serão entregues
+         131  - Índice da instituição que vai processar transação
+         132  - Índice do cartão
+         133  - NSU do SiTef
+         134  - NSU do autorizador
+         135  - Código da autorização da transação
+         156  - Nome da instituição
+         158  - Código da rede autorizadora
+         590  - 
+         591  - 
+         800  - Retorno GerPdv
+         2021 - 
+         2022 - 
+         2023 - 
+         */
+    }
 }
