@@ -1,14 +1,28 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using Tef.Dominio.Conversores;
 using Tef.Dominio.Enums;
+using Tef.Dominio.Interfaces;
 using Tef.Dominio.Utils;
 
 namespace Tef.Dominio.CliSiTef
 {
-    internal class AcCliSiTef
+    internal class AcCliSiTef : ISiTefRequisicao
     {
         private readonly IConfigAcCliSiTef _configuracaoCliSiTef;
         private readonly IRequisicaoSitef _requisicaoSitef;
+
+        private Cupom CupomTef;
+
+        public AcCliSiTef(IConfigAcCliSiTef configAcTefCliSiTef,
+                          IRequisicaoSitef requisicaoSitef)
+        {
+            _configuracaoCliSiTef = configAcTefCliSiTef;
+            _requisicaoSitef = requisicaoSitef;
+        }
+
+        #region Inicialização de tef
 
         bool inicializado;
         bool Inicializado
@@ -21,13 +35,6 @@ namespace Tef.Dominio.CliSiTef
                 else
                     Desinicializa();
             }
-        }
-
-        public AcCliSiTef(IConfigAcCliSiTef configAcTefCliSiTef,
-                          IRequisicaoSitef requisicaoSitef)
-        {
-            _configuracaoCliSiTef = configAcTefCliSiTef;
-            _requisicaoSitef = requisicaoSitef;
         }
 
         public void Inicializa()
@@ -53,9 +60,21 @@ namespace Tef.Dominio.CliSiTef
             inicializado = false;
         }
 
-        public RespostaAdm Adm(string documentoVinculado = "")
+        private void ChecaTefInicializado()
         {
-            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesSitef.OperacaoADM, 0, documentoVinculado);
+            if (!Inicializado)
+                throw new Exception("ATENÇÃO TEF NÃO INICIALIZADO");
+        }
+
+        #endregion
+
+        #region Operações
+
+        public int Adm(string documentoVinculado = "")
+        {
+            ChecaTefInicializado();
+
+            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.OperacaoADM, 0, documentoVinculado);
             if ((int)RetornosSitef.Continue == ret)
             {
                 _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
@@ -65,7 +84,7 @@ namespace Tef.Dominio.CliSiTef
                 };
                 SalvarTransacao(_requisicaoSitef.SiTefTransacao);
 
-                _requisicaoSitef.Salvar("0", OperacoesSitef.OperacaoADM.ObterDescricao(), 0);
+                _requisicaoSitef.Salvar("0", OperacoesTEF.OperacaoADM.ObterDescricao(), 0);
 
                 _requisicaoSitef.Salvar("2", documentoVinculado, 0);
 
@@ -81,27 +100,31 @@ namespace Tef.Dominio.CliSiTef
             }
 
             if ((int)RetornosSitef.Success == ret)
-                Cnf();
+                Cnf(documentoVinculado);
 
-            return null;
+            return ret;
         }
 
-        public RespostaAtv Atv()
+        public int Atv()
         {
-            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesSitef.OperacaoATV);
+            ChecaTefInicializado();
+
+            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.OperacaoATV);
             if ((int)RetornosSitef.Continue == ret)
                 ret = _requisicaoSitef.ContinuarRequisicao();
 
             if (_configuracaoCliSiTef.ConfiguracaoTef.PinPadVerificar)
                 SitefDllMapper.EscreveMensagemPermanentePinPad(_configuracaoCliSiTef.ConfiguracaoTef.PinPadMensagem);
 
-            return null;
+            return ret;
         }
 
-        public RespostaCnc Cnc(string rede, string nsu, DateTime transacaoEm, decimal valor, string documentoVinculado = "")
+        public int Cnc(OperacoesTEF operacao, string documentoVinculado = "")
         {
+            ChecaTefInicializado();
+
             var parametrosAdc = "";
-            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesSitef.OperacaoCNC, 0, "", parametrosAdc, _configuracaoCliSiTef.Operador);
+            var ret = _requisicaoSitef.IniciarRequisicao(operacao, 0, "", parametrosAdc, _configuracaoCliSiTef.Operador);
             if((int)RetornosSitef.Continue == ret)
             {
                 _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
@@ -111,7 +134,7 @@ namespace Tef.Dominio.CliSiTef
                 };
                 SalvarTransacao(_requisicaoSitef.SiTefTransacao);
 
-                _requisicaoSitef.Salvar("0", OperacoesSitef.OperacaoCNC.ObterDescricao(), 0);
+                _requisicaoSitef.Salvar("0", operacao.ObterDescricao(), 0);
 
                 _requisicaoSitef.Salvar("2", documentoVinculado, 0);
 
@@ -127,25 +150,33 @@ namespace Tef.Dominio.CliSiTef
             }
 
             if ((int)RetornosSitef.Success == ret) 
-                Cnf();
+                Cnf(documentoVinculado);
 
-            return null;
+            return ret;
         }
 
-        public void Cnf(string redeAdquirente, string nsu, string codigoControle, string nomeAutomacao, string versaoAutomacao, string registroCertificacao)
+        public void Cnf(string documentoVinculado = "", bool gerarArquivo = true)
         {
-            throw new NotImplementedException();
+            ChecaTefInicializado();
+
+            FinalizarOperacao(1, documentoVinculado);
+
+            _requisicaoSitef.Salvar("729", "1", 0);
+            _requisicaoSitef.Salvar("999", "0", 0);
+
+            if (gerarArquivo)
+                ExportarTransacaoParaArquivo();
+
+            if (_configuracaoCliSiTef.ConfiguracaoTef.PinPadVerificar)
+                SitefDllMapper.EscreveMensagemPermanentePinPad(_configuracaoCliSiTef.ConfiguracaoTef.PinPadMensagem);
         }
 
-        public RespostaCrt ConfirmarCrt(AutorizaDfeEventArgs autorizaDfeEventArgs)
+        public int Crt(decimal valor, string documentoVinculado, string operador, bool confirmarManual = true)
         {
-            throw new NotImplementedException();
-        }
+            ChecaTefInicializado();
 
-        public RespostaCrt Crt(decimal valor, string documentoVinculado, string operador, bool confirmarManual = false)
-        {
             var paramsAdc = string.Empty;
-            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesSitef.OperacaoCRT, valor, documentoVinculado, paramsAdc, operador);
+            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.OperacaoCRT, valor, documentoVinculado, paramsAdc, operador);
 
             if((int)RetornosSitef.Continue == ret)
             {
@@ -175,26 +206,95 @@ namespace Tef.Dominio.CliSiTef
             else if ((int)RetornosSitef.Success == ret)
             {
                 _requisicaoSitef.Salvar("9", "0", 0);
-                Cnf();
+
+                if(confirmarManual)
+                    Cnf(documentoVinculado);
             }
 
-            return null;
+            return ret;
         }
 
-        public void Ncn(string redeAdquirente, string codigoControle)
+        public int Cel(string documentoVinculado = "")
         {
-            throw new NotImplementedException();
+            var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.RecargaCelular, 0m, documentoVinculado);
+
+            if((int)RetornosSitef.Continue == ret)
+            {
+                _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
+                {
+                    DocumentoVinculado = documentoVinculado,
+                    ValorTransacao = 0m
+                };
+                SalvarTransacao(_requisicaoSitef.SiTefTransacao);
+
+                _requisicaoSitef.Salvar("0", OperacoesTEF.RecargaCelular.ObterDescricao(), 0);
+
+                _requisicaoSitef.Salvar("2", documentoVinculado, 0);
+                
+                _requisicaoSitef.Salvar("2", _requisicaoSitef.SiTefTransacao.Identificador.ToString(), 1);
+
+                _requisicaoSitef.Salvar("4", "0", 0);
+                
+                _requisicaoSitef.Salvar("718", $"IP{_configuracaoCliSiTef.ConfiguracaoTef.Terminal}", 0);
+
+                _requisicaoSitef.Salvar("719", $"IP{_configuracaoCliSiTef.ConfiguracaoTef.Empresa}", 0);
+
+                ret = _requisicaoSitef.ContinuarRequisicao();
+            }
+
+            if ((int)RetornosSitef.Success == ret)
+                Cnf(documentoVinculado);
+
+            return ret;
         }
 
-        public void VerificaSeTefEstaAtivo(TefLinhaLista requisicao)
-        {
-            throw new NotImplementedException();
-        }
-
+        #endregion
 
         private void SalvarTransacao(SiTefTransacao siTefTransacao)
+            => CupomTef.TransacoesTEF.Add(siTefTransacao);
+
+        private void FinalizarOperacao(short confirma, string documentoVinculado = "")
         {
-            throw new NotImplementedException();
+            var dataHoraConfirmacao = DateTime.Now;
+
+            if(string.IsNullOrEmpty(documentoVinculado.Trim()))
+                documentoVinculado = new Random().Next(999999).ToString("000000");
+
+            SitefDllMapper.FinalizaFuncaoSiTefInterativo(confirma: confirma, 
+                                                         cupomFiscal: documentoVinculado, 
+                                                         dataFiscal: dataHoraConfirmacao.ToString("yyyyMMdd"),
+                                                         horaFiscal: dataHoraConfirmacao.ToString("HHmmss"),
+                                                         parametrosAdicionais: null);
+        }
+
+        private void ExportarTransacaoParaArquivo()
+        {
+            if (CupomTef == null && CupomTef.TransacoesTEF.Count == 0)
+                return;
+
+            var transacaoIdx = 1;
+            foreach (var transacao in CupomTef.TransacoesTEF)
+            {
+                if (transacao.Retornos.Count == 0)
+                    break;
+
+                var path = $"{_configuracaoCliSiTef.ConfiguracaoTef.PathArquivos}\\TefRetorno";
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                var retornos = transacao.Retornos.OrderBy(x => x.Chave)
+                                                 .ThenBy(x => x.Posicao)
+                                                 .ToList();
+
+                using (StreamWriter sw = File.AppendText($"{path}\\Tef{CupomTef.TipoOperacao}_{CupomTef.DocumentoVinculado}_T{transacaoIdx.ToString("000")}_{DateTime.Now.ToString("yyyyMMddHHmmss")}.tef"))
+                    foreach (var retorno in retornos)
+                    {
+                        sw.WriteLine($"{retorno.Chave.PadLeft(3, '0')}-{retorno.Posicao.ToString("000")}={retorno.Valor}");
+                        sw.Flush();
+                    }
+
+                transacaoIdx++;
+            }
         }
     }
 }

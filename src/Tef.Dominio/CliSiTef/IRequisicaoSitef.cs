@@ -14,7 +14,7 @@ namespace Tef.Dominio.CliSiTef
 
         SiTefTransacao SiTefTransacao { get; set; }
 
-        int IniciarRequisicao(OperacoesSitef funcao, decimal valor = 0, string documento = "", string paramAdicionais = "", string operador = "");
+        int IniciarRequisicao(OperacoesTEF funcao, decimal valor = 0, string documento = "", string paramAdicionais = "", string operador = "");
         int ContinuarRequisicao();
         void Salvar(string chave, string valor, int indice);
     }

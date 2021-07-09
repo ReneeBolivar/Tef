@@ -30,7 +30,7 @@ namespace Tef.Dominio.CliSiTef
         bool PinPadVerificar { get; set; }
     }
 
-    public enum OperacoesSitef
+    public enum OperacoesTEF
     {
         [Description("ATV")]
         OperacaoATV = 111,
@@ -48,6 +48,9 @@ namespace Tef.Dominio.CliSiTef
         OperacaoCNC = 200,
 
         [Description("ReImpressao")]
-        OperacaoReImpressao = 112
+        OperacaoReImpressao = 112,
+
+        [Description("CEL")]
+        RecargaCelular = 300
     }
 }

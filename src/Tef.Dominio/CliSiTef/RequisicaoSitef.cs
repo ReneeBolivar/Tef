@@ -36,17 +36,17 @@ namespace Tef.Dominio.CliSiTef
                 throw new SitefEventNotImplementedException($"Necessário existir ao menos um inscrito no evento {nameof(AoAdicionarRetorno)}");
         }
 
-        public int IniciarRequisicao(OperacoesSitef funcao, decimal valor = 0, string documento = "", string paramAdicionais = "", string operador = "")
+        public int IniciarRequisicao(OperacoesTEF funcao, decimal valor = 0, string documento = "", string paramAdicionais = "", string operador = "")
         {
             if (string.IsNullOrEmpty(documento.Trim()))
                 DefineDocumento(out documento);
 
-            if (!paramAdicionais.Contains("{TipoTratamento=4}") && (paramAdicionais.Contains(OperacoesSitef.OperacaoADM.ObterDescricao()) ||
-                                                                      paramAdicionais.Contains(OperacoesSitef.OperacaoCRT.ObterDescricao()) ||
-                                                                      paramAdicionais.Contains(OperacoesSitef.OperacaoCHQ.ObterDescricao())))
+            if (!paramAdicionais.Contains("{TipoTratamento=4}") && (paramAdicionais.Contains(OperacoesTEF.OperacaoADM.ObterDescricao()) ||
+                                                                      paramAdicionais.Contains(OperacoesTEF.OperacaoCRT.ObterDescricao()) ||
+                                                                      paramAdicionais.Contains(OperacoesTEF.OperacaoCHQ.ObterDescricao())))
                 paramAdicionais += "{TipoTratamento=4}";
 
-            if (funcao == OperacoesSitef.OperacaoCRT && _configAcTefCliSiTef.RetornaQRCode)
+            if (funcao == OperacoesTEF.OperacaoCRT && _configAcTefCliSiTef.RetornaQRCode)
                 paramAdicionais += "{DevolveStringQRCode=1}";
 
             var agora = DateTime.Now;

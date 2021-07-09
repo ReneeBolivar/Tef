@@ -48,6 +48,7 @@
     <Compile Include="AutorizaDfeEventArgs.cs" />
     <Compile Include="Cappta.cs" />
     <Compile Include="CliSiTef\Args\CliSitefCamposEventArgs.cs" />
+    <Compile Include="CliSiTef\Cupom.cs" />
     <Compile Include="CliSiTef\IRequisicaoSitef.cs" />
     <Compile Include="CliSiTef\RequisicaoSitef.cs" />
     <Compile Include="CliSiTef\SitefDllMapper.cs" />
@@ -74,6 +75,13 @@
     <Compile Include="IConfigAcTefDial.cs" />
     <Compile Include="IImprimeViaEventArgs.cs" />
     <Compile Include="ImprimeViaEventArgs.cs" />
+    <Compile Include="Interfaces\IOperacaoADM.cs" />
+    <Compile Include="Interfaces\IOperacaoATV.cs" />
+    <Compile Include="Interfaces\IOperacaoCEL.cs" />
+    <Compile Include="Interfaces\IOperacaoCNC.cs" />
+    <Compile Include="Interfaces\IOperacaoCNF.cs" />
+    <Compile Include="Interfaces\IOperacaoCRT.cs" />
+    <Compile Include="Interfaces\ISiTefRequisicao.cs" />
     <Compile Include="IRequisicaoAtv.cs" />
     <Compile Include="ITef.cs" />
     <Compile Include="Linx.cs" />
