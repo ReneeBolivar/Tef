@@ -14,17 +14,16 @@ namespace Tef.Dominio.CliSiTef
         public string DocumentoVinculado { get; set; }
         public decimal ValorTransacao { get; set; }
         
-        private List<TefLinha> retornos;
-        public List<TefLinha> Retornos
+        private List<TefRetorno> retornos;
+        public List<TefRetorno> Retornos
         {
             get 
             {
                 if (retornos == null) 
-                    retornos = new List<TefLinha>();
+                    retornos = new List<TefRetorno>();
 
                 return retornos; 
             }
         }
-
     }
 }

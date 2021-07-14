@@ -48,11 +48,13 @@
     <Compile Include="AutorizaDfeEventArgs.cs" />
     <Compile Include="Cappta.cs" />
     <Compile Include="CliSiTef\Args\CliSitefCamposEventArgs.cs" />
+    <Compile Include="CliSiTef\ConfigTef.cs" />
     <Compile Include="CliSiTef\Cupom.cs" />
     <Compile Include="CliSiTef\IRequisicaoSitef.cs" />
     <Compile Include="CliSiTef\RequisicaoSitef.cs" />
     <Compile Include="CliSiTef\SitefDllMapper.cs" />
     <Compile Include="CliSiTef\SiTefTransacao.cs" />
+    <Compile Include="CliSiTef\TefRetorno.cs" />
     <Compile Include="Comparavel.cs" />
     <Compile Include="CliSiTef\ConfigAcTefCliSiTef.cs" />
     <Compile Include="ConfigAcTefDial.cs" />

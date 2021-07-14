@@ -21,7 +21,7 @@ namespace Tef.Dominio.CliSiTef
         {
             _configAcTefCliSiTef = configAcTefCliSiTef;
             SiTefTransacao = siTefTransacao;
-            ChecarInscricaoEventos();
+            //ChecarInscricaoEventos();
         }
 
         private void ChecarInscricaoEventos()
@@ -262,14 +262,14 @@ namespace Tef.Dominio.CliSiTef
                     if (!digitado || interromper)
                         continua = -1;
 
-                buffer = Encoding.ASCII.GetBytes(respostaSitef + new string('\0', 20000 - respostaSitef.Length));
+                buffer = Encoding.ASCII.GetBytes(respostaSitef + new string('\0', 20000 - (respostaSitef?.Length ?? 0)));
 
             } while (retorno == RetornosSitef.Continue);
 
-            return 0;
+            return (int)RetornosSitef.Success;
         }
 
-        private TefLinha tefRetorno;
+        private TefRetorno tefRetorno;
         private void ArmazenarInformacoes(string mensagem, long tipoCampo)
         {
             switch (tipoCampo)
@@ -401,12 +401,12 @@ namespace Tef.Dominio.CliSiTef
 
         public void Salvar(string chave, string valor, int indice)
         {
-            tefRetorno = new TefLinha(chave, valor, indice);
+            tefRetorno = new TefRetorno(chave, valor, indice);
             SalvarRetorno(tefRetorno);
             tefRetorno = null;
         }
 
-        private void SalvarRetorno(TefLinha tefRetorno)
+        private void SalvarRetorno(TefRetorno tefRetorno)
         {
             var retorno = SiTefTransacao.Retornos.SingleOrDefault(x => x.Chave == tefRetorno.Chave);
             if (retorno != null)

@@ -2,6 +2,6 @@
 {
     public interface IOperacaoCNF
     {
-        void Cnf(string documentoVinculado = "", bool gerarArquivo = true);
+        int Cnf(string documentoVinculado = "", bool gerarArquivo = true);
     }
 }

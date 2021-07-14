@@ -17,7 +17,7 @@ namespace Tef.Dominio
         {
         }
 
-        public override RespostaAdm Adm()
+        public override RespostaAdm Adm(string documentoVinculado = "")
         {
             VerificaInicializado();
             var requisicao = FabricarRequisicao.MontaRequisicaoAdm(IdRequisicao, _configAcTefDial);
@@ -37,7 +37,7 @@ namespace Tef.Dominio
             return new RespostaCnc(tefResposta, respostaRequisicao);
         }
 
-        public override RespostaCrt Crt(decimal valor, string documentoVinculado, bool confirmarManual = false)
+        public override RespostaCrt Crt(decimal valor, string documentoVinculado, string operador = "", bool confirmarManual = false)
         {
             VerificaInicializado();
             var requisicao = FabricarRequisicao.MontaRequisicaoCrt(

@@ -123,7 +123,7 @@ namespace Tef.Dominio.Utils
             Bandeiras.Add("00078", new Cartao("PEELA", "CREDITO"));
             Bandeiras.Add("00084", new Cartao("BANRISUL", "CREDITO"));
             Bandeiras.Add("00086", new Cartao("VERDECARD", "CREDITO"));
-            Bandeiras.Add("00086", new Cartao("VERDECARD", "CREDITO PRIVATE LABEL"));
+            //Bandeiras.Add("00086", new Cartao("VERDECARD", "CREDITO PRIVATE LABEL"));
             Bandeiras.Add("00087", new Cartao("REFEISUL", "CREDITO PRIVATE LABEL"));
             Bandeiras.Add("00091", new Cartao("BANESE", "CREDITO"));
             Bandeiras.Add("00095", new Cartao("APOLOCARD", "CREDITO"));
@@ -143,7 +143,7 @@ namespace Tef.Dominio.Utils
             Bandeiras.Add("10046", new Cartao("VALEFACIL", "VOUCHER"));
             Bandeiras.Add("10076", new Cartao("PEELA", "GIFT"));
             Bandeiras.Add("10077", new Cartao("LIBERCARD", "VOUCHER"));
-            Bandeiras.Add("10082", new Cartao("ALELO COMBUSTIVEL", string.Empty));
+            //Bandeiras.Add("10082", new Cartao("ALELO COMBUSTIVEL", string.Empty));
             Bandeiras.Add("10082", new Cartao("ELO COMBUSTIVEL", string.Empty));
             Bandeiras.Add("10083", new Cartao("VR", "VOUCHER"));
             Bandeiras.Add("10088", new Cartao("REFEISUL COMBUSTIVEL", string.Empty));
@@ -187,7 +187,7 @@ namespace Tef.Dominio.Utils
             Bandeiras.Add("00143", new Cartao("BONUSCRED", "CREDITO"));
             Bandeiras.Add("10146", new Cartao("BONUSCRED", "VOUCHER"));
             Bandeiras.Add("00144", new Cartao("BRASIL CARD", "CREDITO"));
-            Bandeiras.Add("10146", new Cartao("BRASIL CARD", "VOUCHER"));
+            //Bandeiras.Add("10146", new Cartao("BRASIL CARD", "VOUCHER"));
             Bandeiras.Add("00145", new Cartao("CONVENIOS CARD", "CREDITO"));
             Bandeiras.Add("10147", new Cartao("CONVENIOS CARD", "VOUCHER"));
             Bandeiras.Add("10149", new Cartao("CREDIALIMENTACAO", "VOUCHER"));

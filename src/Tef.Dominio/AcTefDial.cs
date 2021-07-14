@@ -36,7 +36,7 @@ namespace Tef.Dominio
             return new RespostaAtv(tefResposta);
         }
 
-        public virtual RespostaAdm Adm()
+        public virtual RespostaAdm Adm(string documentoVinculado = "")
         {
             VerificaInicializado();
             var requisicao = FabricarRequisicao.MontaRequisicaoAdm(IdRequisicao, _configAcTefDial);
@@ -56,7 +56,7 @@ namespace Tef.Dominio
             return new RespostaCnc(tefResposta, respostaRequisicao);
         }
 
-        public virtual RespostaCrt Crt(decimal valor, string documentoVinculado, bool confirmarManual = false)
+        public virtual RespostaCrt Crt(decimal valor, string documentoVinculado, string operador = "", bool confirmarManual = false)
         {
             VerificaInicializado();
             var requisicao = FabricarRequisicao.MontaRequisicaoCrt(
