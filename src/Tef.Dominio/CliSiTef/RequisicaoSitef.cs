@@ -13,6 +13,7 @@ namespace Tef.Dominio.CliSiTef
         public NotificarMensagemSitef AoNotificarMensagemSitef { get; set; }
         public SolicitarCamposSitef AoSolicitarCamposSitef { get; set; }
         public AdicionarRetorno AoAdicionarRetorno { get; set; }
+        public ComprovanteGerado AoGerarComprovante { get; set; } = delegate { };
 
         private readonly IConfigAcCliSiTef _configAcTefCliSiTef;
         public SiTefTransacao SiTefTransacao { get; set; }
@@ -21,11 +22,15 @@ namespace Tef.Dominio.CliSiTef
         {
             _configAcTefCliSiTef = configAcTefCliSiTef;
             SiTefTransacao = siTefTransacao;
-            //ChecarInscricaoEventos();
+            ChecarInscricaoEventos();
         }
 
         private void ChecarInscricaoEventos()
         {
+#if DEBUG
+            return; //Não checar em debug pois os testes não irão implementar os eventos de forma a manter a consistência dos mesmos
+#endif
+
             if (!AoNotificarMensagemSitef.GetInvocationList().Any())
                 throw new SitefEventNotImplementedException($"Necessário existir ao menos um inscrito no evento {nameof(AoNotificarMensagemSitef)}");
 
@@ -323,6 +328,7 @@ namespace Tef.Dominio.CliSiTef
                     for (var i = 0; i < tamArray; i++)
                         Salvar("713", $"\"{viaCliente[i]}\"", i);
 
+                    AoGerarComprovante(mensagem);
                     break;
                 case 122:
                     var viaEstabelecimento = mensagem.Split('\n', '\r');
@@ -332,6 +338,7 @@ namespace Tef.Dominio.CliSiTef
                     for (int i = 0; i < tamArrayE; i++)
                         Salvar("715", viaEstabelecimento[i], i);
 
+                    AoGerarComprovante(mensagem);
                     break;
                 case 123:
                     if(!string.IsNullOrEmpty(mensagem.Trim()))

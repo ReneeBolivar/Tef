@@ -83,7 +83,7 @@ namespace Tef.Dominio.CliSiTef
             };
 
             var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.OperacaoADM, 0, documentoVinculado);
-            if ((int)RetornosSitef.Continue == ret)
+            if (RetornosSitef.Continue == (RetornosSitef)ret)
             {
                 _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
                 {
@@ -107,7 +107,7 @@ namespace Tef.Dominio.CliSiTef
                 ret = _requisicaoSitef.ContinuarRequisicao();
             }
 
-            if ((int)RetornosSitef.Success == ret)
+            if (RetornosSitef.Success == (RetornosSitef)ret)
                 Cnf(documentoVinculado);
 
             return ret;
@@ -118,7 +118,7 @@ namespace Tef.Dominio.CliSiTef
             ChecaTefInicializado();
 
             var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.OperacaoATV);
-            if ((int)RetornosSitef.Continue == ret)
+            if (RetornosSitef.Continue == (RetornosSitef)ret)
                 ret = _requisicaoSitef.ContinuarRequisicao();
 
             if (_configuracaoCliSiTef.ConfiguracaoTef.PinPadVerificar)
@@ -140,7 +140,7 @@ namespace Tef.Dominio.CliSiTef
 
             var parametrosAdc = "";
             var ret = _requisicaoSitef.IniciarRequisicao(operacao, 0, "", parametrosAdc, _configuracaoCliSiTef.Operador);
-            if((int)RetornosSitef.Continue == ret)
+            if(RetornosSitef.Continue == (RetornosSitef)ret)
             {
                 _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
                 {
@@ -164,7 +164,7 @@ namespace Tef.Dominio.CliSiTef
                 ret = _requisicaoSitef.ContinuarRequisicao();
             }
 
-            if ((int)RetornosSitef.Success == ret) 
+            if (RetornosSitef.Success == (RetornosSitef)ret) 
                 Cnf(documentoVinculado);
 
             return ret;
@@ -205,7 +205,7 @@ namespace Tef.Dominio.CliSiTef
             var paramsAdc = string.Empty;
             var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.OperacaoCRT, valor, documentoVinculado, paramsAdc, operador);
 
-            if((int)RetornosSitef.Continue == ret)
+            if(RetornosSitef.Continue == (RetornosSitef)ret)
             {
                 _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
                 {
@@ -262,7 +262,7 @@ namespace Tef.Dominio.CliSiTef
 
             var ret = _requisicaoSitef.IniciarRequisicao(OperacoesTEF.RecargaCelular, 0m, documentoVinculado);
 
-            if((int)RetornosSitef.Continue == ret)
+            if(RetornosSitef.Continue == (RetornosSitef)ret)
             {
                 _requisicaoSitef.SiTefTransacao = new SiTefTransacao()
                 {
@@ -286,7 +286,7 @@ namespace Tef.Dominio.CliSiTef
                 ret = _requisicaoSitef.ContinuarRequisicao();
             }
 
-            if ((int)RetornosSitef.Success == ret)
+            if (RetornosSitef.Success == (RetornosSitef)ret)
                 Cnf(documentoVinculado);
 
             return ret;

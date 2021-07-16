@@ -108,5 +108,15 @@
     <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="ViaComprovante.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CliSiTef\Dlls\Cheque.ini" />
+    <None Include="CliSiTef\Dlls\CliSiTef.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CliSiTef\Dlls\CliSiTef32I.dll" />
+    <Content Include="CliSiTef\Dlls\libemv.dll" />
+    <Content Include="CliSiTef\Dlls\QREncode32.dll" />
+    <Content Include="CliSiTef\Dlls\RechargeRPC.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
