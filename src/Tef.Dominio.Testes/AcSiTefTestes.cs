@@ -91,7 +91,10 @@ namespace Tef.Dominio.Testes
                 "8:Consulta Saldo Debito",
                 "9:Consulta Saldo Credito",
                 "10:Outros Cielo",
-                "11:Carga forcada de tabelas no pinpad (SiTef)",
+                "11:Carga forcada de tabelas no pinpad (Servidor)",
+                "12:Consulta Saque Parcelado",
+                "13:Consulta Parcelas Cred. Conductor",
+                "14:Consulta Parcelas Cred. MarketPay",
                 ""
             };
             var itensMenuRetornado = new List<string>();
